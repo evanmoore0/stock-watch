@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {View, Text} from 'react-native'
+import { auth } from "../../firebase-config";
+import {RootTabScreenProps} from '../types/navigation'
 
-function Library() {
+function Library({route, navigation} : RootTabScreenProps<'Library'>) {
+    const [bruh, setBruh] = useState("")
+
+    useEffect(() => {
+        if(route.params != undefined) {
+            setBruh(route.params.stock.sName)
+        }
+        
+    }, [route])
     return(
-        <View style={{flex:1, backgroundColor: 'blue'}}>
+        <View style={{flex:1, justifyContent:'center', alignItems: 'center', backgroundColor: 'blue'}}>
 
-        </View>
+        <Text
+        style={{fontSize: 25}}
+        >
+            {auth.currentUser?.uid}
+
+        </Text>
+
+    </View>
     )
 }
 

@@ -6,6 +6,8 @@
  import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
  import { NativeStackScreenProps } from '@react-navigation/native-stack';
  import { MaterialTopTabScreenProps} from '@react-navigation/material-top-tabs'
+import { regAction } from './screens';
+import {dStock} from './data'
  
  declare global {
    namespace ReactNavigation {
@@ -16,8 +18,8 @@
  export type RootStackParamList = {
    Loading: undefined;
    Welcome: undefined;
-   LoginRegister: undefined;
-   StockDisplay: undefined;
+   LoginRegister: regAction;
+   StockDisplay: dStock;
    TabStack: NavigatorScreenParams<RootTabParamList> | undefined;
  };
  
@@ -28,7 +30,8 @@
  
  export type RootTabParamList = {
    Stocks: undefined;
-   Library: undefined;
+   Library: dStock;
+   route: undefined
  };
  
  export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

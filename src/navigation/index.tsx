@@ -8,7 +8,13 @@
  import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
  import { createNativeStackNavigator } from '@react-navigation/native-stack';
  import * as React from 'react';
+
+ 
  import { ColorSchemeName, Pressable } from 'react-native';
+
+ import normalize from '../utils/normalize';
+ import { Entypo } from '@expo/vector-icons';
+
 
  //Screens
 import Library from '../screens/Library';
@@ -18,8 +24,9 @@ import Loading from '../screens/Loading';
 import LoginAndRegister from '../screens/LoginRegister';
 import Welcome from '../screens/Welcome';
 
+import {RootStackParamList, RootTabParamList, RootTabScreenProps} from '../types/navigation'
 
- import {RootStackParamList, RootTabParamList, RootTabScreenProps} from '../navigation/types'
+
 
  import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
@@ -28,6 +35,28 @@ import Welcome from '../screens/Welcome';
  export default function Navigation() {
    return (
      <NavigationContainer
+     theme={
+       {
+         colors:{
+        primary: 'black',
+         background: 'black',
+         border: 'black',
+         text: 'white',
+
+         card: 'black',
+         notification: 'black'
+       },
+       dark: false
+      
+      }
+       
+     }
+      // theme={
+      //   {colors:{
+      //     background: "black",
+          
+      //   }}
+      // }
     //  theme={
     //   {
     //     colors:{
@@ -65,12 +94,18 @@ import Welcome from '../screens/Welcome';
        <Stack.Screen
        name = "LoginRegister"
        component = {LoginAndRegister}
+       
        />
 
        <Stack.Screen
        name = "TabStack"
        component = {TabStackNavigator}
        />
+
+       <Stack.Screen
+       name = "StockDisplay"
+       component = {StockDisplay}
+      />
       
      </Stack.Navigator>
    );
@@ -85,7 +120,44 @@ import Welcome from '../screens/Welcome';
 
  function TabStackNavigator() {
    return(
-     <Tab.Navigator>
+     <Tab.Navigator
+     initialRouteName='Stocks'
+     tabBarPosition = "bottom"
+
+     screenOptions={({route}) => (
+      {
+        tabBarStyle: {
+            paddingBottom: normalize.setNormalize(35), 
+            paddingTop: normalize.setNormalize(10)
+        },
+        
+    tabBarIcon: ({ focused, color }) => {
+        let iconName : keyof typeof Entypo.glyphMap = "line-graph";
+
+        if(route.name === 'Stocks') {
+            iconName = focused
+            ? 'line-graph'
+            : 'line-graph';
+            
+        } else if (route.name === "Library") {
+            iconName = focused ? 'archive' : 'archive';
+        }
+        return <Entypo name={iconName} size={normalize.setNormalize(24)} color={color} />;
+
+
+    },
+
+    tabBarActiveTintColor: 'white',
+    tabBarInactiveTintColor: 'gray',
+    headerShown: false,
+    tabBarShowLabel: false,
+    tabBarActiveBackgroundColor: 'black',
+    tabBarInactiveBackgroundColor: 'black',
+    }
+     )}
+
+
+     >
 
       <Tab.Screen
        name = "Stocks"

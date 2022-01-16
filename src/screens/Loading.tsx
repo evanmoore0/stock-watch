@@ -1,26 +1,47 @@
-import React from "react";
-import {View, Text, TouchableOpacity} from 'react-native'
-import {useNavigation} from '@react-navigation/native'
-import {RootStackParamList} from '../navigation/types'
-import {NativeStackNavigationProp} from '@react-navigation/native-stack'
+import React, { FC, useEffect, useState } from "react";
+import { TouchableOpacity, View, Text} from "react-native";
+import Graphic from "../components/Graphic";
+import {VictoryLine, VictoryChart} from 'victory-native'
+import normalize from "../utils/normalize";
+import { useLinkProps, useNavigation } from "@react-navigation/native";
 
-type loadingScreenProp = NativeStackNavigationProp<RootStackParamList, 'Loading'>
+import {auth} from '../../firebase-config'
+import { onAuthStateChanged } from "firebase/auth";
 
-function Loading() {
 
-    const navigation = useNavigation<loadingScreenProp>()
+const Loading: FC = () => {
+
+    const navigation = useNavigation()
+
+
+    // const isAuth = (user: any) => {
+       
+    //     // console.log(auth.currentUser?.uid)
+       
+    //     console.log("USERS SL:DFJS")
+    //     // console.log(getAuth())
+
+    //         if(user) {
+    //             navigation.navigate("TabStack")
+    //         } else {
+    //             navigation.navigate("Welcome")
+    //         }
+    //     }
+    
+    useEffect(() => {
+
+        // const subscribe = onAuthStateChanged(auth, isAuth)
+        // return subscribe
+
+    }, [])
+
+
+
     return(
-        <View style={{flex:1, backgroundColor: 'black', justifyContent:'center', alignItems: 'center'}}>
-
-            <TouchableOpacity
-            style={{width: 50, height: 50, backgroundColor: 'white'}}
-            onPress={()=> {
-                navigation.navigate('Welcome')
-            }}
-            >
-
-            </TouchableOpacity>
-
+        <View style={{flex:1}}>
+            <VictoryChart>
+                <VictoryLine/>
+            </VictoryChart>
         </View>
     )
 }
