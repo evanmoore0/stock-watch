@@ -288,9 +288,7 @@ function Stocks() {
         behavior = 'padding'
         
         >
-            <VictoryChart>
-
-            </VictoryChart>
+           
             
             {/*
             Graphic that is displayed under trending 
