@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { TouchableOpacity, View, StyleSheet} from "react-native";
+import { TouchableOpacity, View, StyleSheet, ActivityIndicator} from "react-native";
 import Graphic from "../components/Graphic";
 import {VictoryBar, VictoryChart, VictoryLine, VictoryTheme} from 'victory-native'
 import normalize from "../utils/normalize";
@@ -11,6 +11,7 @@ import { VictoryBarProps } from "victory-bar";
 import { VictoryCommonPrimitiveProps, VictoryDatableProps } from "victory-core";
 
 import { BarProps } from "victory-bar";
+import Navigation from "../navigation";
 
 
 const Loading: FC = () => {
@@ -22,88 +23,39 @@ const Loading: FC = () => {
     const [loading,setLoading] = useState(true)
 
 
-    // const isAuth = (user: any) => {
+    const isAuth = () => {
        
-    //     // console.log(auth.currentUser?.uid)
+        // console.log(auth.currentUser?.uid)
        
-    //     console.log("USERS SL:DFJS")
-    //     // console.log(getAuth())
+        console.log("USERS SL:DFJS")
+        // console.log(getAuth())
 
-    //         if(user) {
-    //             navigation.navigate("TabStack")
-    //         } else {
-    //             navigation.navigate("Welcome")
-    //         }
-    //     }
+        auth.onAuthStateChanged((user) => {
+            if(user) {
+                navigation.navigate("TabStack")
+            } else {
+                navigation.navigate("Welcome")
+            }
+         })
+        }
     
     useEffect(() => {
 
-        setVictory( [
-            { x: 1, y: 13000 },
-            { x: 2, y: 16500 },
-            { x: 3, y: 14250 },
-            { x: 4, y: 19000 }
-          ])          
 
-          setLoading(false)
-
-
-
-
+        isAuth()
     }, [])
-
-   
-
-   
-    // const data = [
-    //     { quarter: 1, earnings: 13000 },
-    //     { quarter: 2, earnings: 16500 },
-    //     { quarter: 3, earnings: 14250 },
-    //     { quarter: 4, earnings: 19000 }
-    //   ];
-
-
-
-    // const stock = () => {
-    //     return(
-    //         <View>
-    //             <View style={styles.container}>
-       
-    //   </View>
-    //         </View>
-    //     )
-    // }
-
-    const Maybe = () => {
-
-        return(
-            <View>
-                {loading == true ? <View></View> : <VictoryLine
-                        style={{
-                            data: { stroke: "#c43a31" },
-     
-                        }}
-                        data={[
-                        { x: 1, y: 2 },
-                        { x: 2, y: 3 },
-                        { x: 3, y: 5 },
-                        { x: 4, y: 4 },
-                        { x: 5, y: 7 }
-                        ]}
-                        {...undefined}
-                        
-                        
-                    />}
-            </View>
-        )
-        
-    }
 
 
 
     return(
-        <View>
-            <Maybe/>
+        <View style={{justifyContent: 'center', alignItems: 'center', flex:1}}>
+            <ActivityIndicator
+            size={'large'}
+            color={'red'}
+            >
+
+
+            </ActivityIndicator>
         </View>
     )
 }

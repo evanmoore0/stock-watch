@@ -313,9 +313,12 @@ function StockDisplay({route, navigation}: RootStackScreenProps<'StockDisplay'>)
             //     }
             //     >      
 
-            <VictoryLine>
+            // <VictoryLine>
 
-            </VictoryLine>
+            // </VictoryLine>
+            <View>
+                
+            </View>
            
           
         )

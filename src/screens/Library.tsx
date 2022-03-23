@@ -4,25 +4,15 @@ import { auth } from "../../firebase-config";
 import {RootTabScreenProps} from '../types/navigation'
 
 function Library({route, navigation} : RootTabScreenProps<'Library'>) {
-    const [bruh, setBruh] = useState("")
-
-    useEffect(() => {
-        if(route.params != undefined) {
-            setBruh(route.params.stock.sName)
-        }
-        
-    }, [route])
+    
     return(
-        <View style={{flex:1, justifyContent:'center', alignItems: 'center', backgroundColor: 'blue'}}>
+        <View style={{flex:1, justifyContent:'center', alignItems: 'center'}}>
 
-        <Text
-        style={{fontSize: 25}}
-        >
-            {auth.currentUser?.uid}
+            
 
-        </Text>
+      
 
-    </View>
+        </View>
     )
 }
 
